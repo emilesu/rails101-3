@@ -2,17 +2,6 @@
   <h2>新增话题</h2>
   <hr>
 
-  <%= form_for @group do |f| %>
+  <%= render "form" %>
 
-  标题
-  <br>
-  <%= f.text_field :title %>
-  <br>
-  叙述
-  <br>
-  <%= f.text_area :description %>
-  <br>
-
-  <%= f.submit "提交", :disable_with => '正在提交中...' %>
-  <% end %>
 </div>
