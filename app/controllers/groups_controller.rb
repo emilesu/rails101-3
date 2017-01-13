@@ -42,6 +42,30 @@ class GroupsController < ApplicationController
       redirect_to groups_path, notice: "删除成功..."
   end
 
+  def join
+    @group = Group.find(params[:id])
+    if !current_user.is_member_of?(@group)
+      current_user.join!(@group)
+      flash[:notice] = "加入本小组成功！"
+    else
+      flash[:warning] = "你已经是本小组成员了！"
+    end
+
+    redirect_to group_path(@group)
+  end
+
+  def quit
+    @group = Group.find(params[:id])
+    if current_user.is_member_of?(@group)
+      current_user.quit!(@group)
+      flash[:alert] = "已推出本小组！"
+    else
+      flash[:warning] = "你不是小组成员，怎么退出？"
+    end
+
+    redirect_to group_path(@group)
+  end
+
 
 
   private
